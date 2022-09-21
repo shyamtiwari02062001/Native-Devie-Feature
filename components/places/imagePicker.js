@@ -2,21 +2,16 @@
 import React, {useState} from 'react';
 // Import required components
 import {
-  SafeAreaView,
   StyleSheet,
-  Text,
   View,
-  TouchableOpacity,
   Image,
   Platform,
   PermissionsAndroid,
   Alert,
 } from 'react-native';
-
-// Import Image Picker
-// import ImagePicker from 'react-native-image-picker';
 import {launchCamera} from 'react-native-image-picker';
-
+import {Colors} from '../../constant/colors';
+import OutlinedButton from '../ui/outlinedButton';
 const ImagePicker = () => {
   const [filePath, setFilePath] = useState();
 
@@ -66,7 +61,7 @@ const ImagePicker = () => {
       mediaType: type,
       maxWidth: 300,
       maxHeight: 550,
-      quality: 1,
+      quality: 0.5,
       videoQuality: 'low',
       durationLimit: 30, //Video max duration in seconds
       saveToPhotos: true,
@@ -93,57 +88,35 @@ const ImagePicker = () => {
     }
   };
   return (
-    <SafeAreaView style={styles.rootContainer}>
-      <Text style={styles.titleText}>
-        Example of Image Picker in React Native
-      </Text>
-      <View style={styles.container}>
-        <Image source={{uri: filePath}} style={styles.imageStyle} />
-        <Text style={styles.textStyle}>{filePath}</Text>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.buttonStyle}
-          onPress={() => captureImage('photo')}>
-          <Text style={styles.textStyle}>Launch Camera for Image</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      {filePath && <Image source={{uri: filePath}} style={styles.imageStyle} />}
+      <OutlinedButton
+        icon={require('../../assets/camera.png')}
+        onPress={() => captureImage('photo')}>
+        Take Image
+      </OutlinedButton>
+    </View>
   );
 };
 
 export default ImagePicker;
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-  },
   container: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: '#fff',
+    justifyContent: 'center',
     alignItems: 'center',
-  },
-  titleText: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    paddingVertical: 20,
-  },
-  textStyle: {
-    padding: 10,
-    color: 'black',
-    textAlign: 'center',
-  },
-  buttonStyle: {
-    alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 5,
-    marginVertical: 10,
-    width: 250,
   },
   imageStyle: {
-    width: 200,
+    width: '100%',
     height: 200,
     margin: 5,
+  },
+  buttonStyle: {
+    padding: 8,
+    margin: 10,
+  },
+  textStyle: {
+    color: Colors.primary500,
+    fontSize: 20,
   },
 });
