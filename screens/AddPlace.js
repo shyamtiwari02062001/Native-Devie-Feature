@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-const App = () => {
+const AddPlace = () => {
   return (
     <View>
-      <Text>App</Text>
+      <Text>AddPlace</Text>
     </View>
   );
 };
-export default App;
+export default AddPlace;
