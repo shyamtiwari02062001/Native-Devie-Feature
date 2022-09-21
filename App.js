@@ -1,10 +1,33 @@
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {View, Text} from 'react-native';
+import AddPlace from './screens/AddPlace';
+import AllPlace from './screens/AllPlaces';
+import IconButton from './components/ui/iconButton.js';
+const Stack = createNativeStackNavigator();
 const App = () => {
   return (
-    <View>
-      <Text>App</Text>
-    </View>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="AllPlaces"
+            component={AllPlace}
+            options={({navigation}) => ({
+              headerRight: ({tintColor}) => (
+                <IconButton
+                  color={tintColor}
+                  size={24}
+                  icon={require('./assets/plus.png')}
+                  onPress={() => navigation.navigate('AddPlaces')}
+                />
+              ),
+            })}
+          />
+          <Stack.Screen name="AddPlaces" component={AddPlace} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 export default App;

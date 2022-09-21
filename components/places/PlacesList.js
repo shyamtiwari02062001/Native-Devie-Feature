@@ -26,5 +26,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  fallBackText: 16,
+  fallBackText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+  },
 });
